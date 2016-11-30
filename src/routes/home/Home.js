@@ -7,7 +7,7 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Home.css';
 
@@ -17,8 +17,7 @@ class Home extends React.Component {
       <div className={s.root}>
         <div className={s.container}>
           <h1 className={s.title}>React.js News</h1>
-          <ul className={s.news}>
-          </ul>
+          <ul className={s.news} />
         </div>
       </div>
     );
