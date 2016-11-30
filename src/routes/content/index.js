@@ -17,23 +17,14 @@ export default {
   path: '*',
 
   async action({ path }) { // eslint-disable-line react/prop-types
-    const resp = await fetch('/graphql', {
-      method: 'post',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        query: `{content(path:"${path}"){path,title,content,component}}`,
-      }),
-      credentials: 'include',
-    });
+    const resp = await fetch(`https://api.github.com/repos${path}`);
+    if (resp.status === 404) return undefined;
     if (resp.status !== 200) throw new Error(resp.statusText);
-    const { data } = await resp.json();
-    if (!data || !data.content) return undefined;
+    const data = await resp.json();
+    if (!data || !data.name) return undefined;
     return {
-      title: data.content.title,
-      component: <Layout><Content {...data.content} /></Layout>,
+      title: data.name,
+      component: <Layout><Content title={data.name} content={data.description} /></Layout>,
     };
   },
 
