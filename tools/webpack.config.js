@@ -77,6 +77,13 @@ const config = {
         },
       },
       {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        include: [
+          path.resolve(__dirname, '../src'),
+        ],
+      },
+      {
         test: /\.css/,
         loaders: [
           'isomorphic-style-loader',
@@ -123,7 +130,7 @@ const config = {
   resolve: {
     root: path.resolve(__dirname, '../src'),
     modulesDirectories: ['node_modules'],
-    extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx', '.json'],
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.jsx', '.json'],
   },
 
   // Don't attempt to continue if there are any errors.
@@ -215,7 +222,7 @@ const config = {
 
 const clientConfig = extend(true, {}, config, {
   entry: {
-    client: './client.js',
+    client: './client.tsx',
   },
 
   output: {
